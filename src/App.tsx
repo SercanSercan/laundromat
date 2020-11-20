@@ -4,6 +4,7 @@ import fire from './config/fire';
 import {IBooking} from "./interfaces";
 
 const collectionName = "gabelsGate1";
+const numOfDays = 10;
 
 function App() {
   const [bookings, setBookings] = useState<IBooking[]>();
@@ -33,7 +34,12 @@ function App() {
 
   return (
     <div className="App">
-      hello
+      <header>
+      </header>
+      <main>
+
+      </main>
+      <footer></footer>
     </div>
   );
 }
