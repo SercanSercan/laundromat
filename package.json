@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fremtind/jkl-card-react": "^1.3.22",
     "@fremtind/jkl-datepicker-react": "^3.6.3",
     "@fremtind/jkl-select-react": "^2.5.1",
     "@fremtind/jkl-text-input-react": "^3.6.1",
