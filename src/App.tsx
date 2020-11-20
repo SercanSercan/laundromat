@@ -5,14 +5,14 @@ import { DatePicker } from '@fremtind/jkl-datepicker-react';
 import "@fremtind/jkl-datepicker/datepicker.min.css";
 import "@fremtind/jkl-icon-button/icon-button.min.css";
 import fire from './config/fire';
-import { IBooking } from "./interfaces";
+import {BOOKING_TIMES, IBooking} from "./interfaces";
 
 const collectionName = "gabelsGate1";
 const numOfDays = 10;
 
 function App() {
   const [bookings, setBookings] = useState<IBooking[]>();
-  let initialDate = new Date();
+  let initialDate = new Date(new Date().setHours(0,0,0,0));
 
   useEffect(() => {
     loadBookings();
@@ -27,7 +27,6 @@ function App() {
         bookingArray.push(tuple as IBooking);
       });
     }).then(function() {
-      //console.log(bookingArray);
       setBookings(bookingArray);
     });
   };
@@ -38,29 +37,39 @@ function App() {
   };
 
   const renderBookingGrid = () => {
-    const rows:JSX.Element[] = [];
-      console.log("initialDate", initialDate);
-    let currentDate = initialDate;
-    for (let i = 0; i < numOfDays; i++) {
-      rows.push(
-          <div className={"bookingGrid-row"}>
-            <div className={"bookingGrid-row__dateCell"}>{formatDate(currentDate)}</div>
-            <div className={"bookingGrid-row__bookingCell"}></div>
-            <div className={"bookingGrid-row__bookingCell"}></div>
-            <div className={"bookingGrid-row__bookingCell"}></div>
-            <div className={"bookingGrid-row__bookingCell"}></div>
-          </div>
-      );
-      currentDate.setDate(currentDate.getDate() + 1);
-      //console.log("currentDate", currentDate);
-    }
+      const rows: JSX.Element[] = [];
+      let currentDate = initialDate;
+      for (let i = 0; i < numOfDays; i++) {
+          rows.push(
+              <div className={"bookingGrid-row"}>
+                  <div className={"bookingGrid-row__dateCell"}>{formatDate(currentDate)}</div>
+                  <div className={"bookingGrid-row__bookingCell"}>{findBookedPerson(currentDate, BOOKING_TIMES.SEVEN_ELEVEN)}</div>
+                  <div className={"bookingGrid-row__bookingCell"}>{findBookedPerson(currentDate, BOOKING_TIMES.ELEVEN_FIFTEEN)}</div>
+                  <div className={"bookingGrid-row__bookingCell"}>{findBookedPerson(currentDate, BOOKING_TIMES.FIFTEEN_NINETEEN)}</div>
+                  <div className={"bookingGrid-row__bookingCell"}>{findBookedPerson(currentDate, BOOKING_TIMES.NINETEEN_TWENTYTHREE)}</div>
+              </div>
+          );
+          currentDate.setDate(currentDate.getDate() + 1);
+      }
 
-    return (
+      return (
         <Card className="bookingGrid">
           {rows}
         </Card>
-    );
+      );
   };
+
+    const findBookedPerson = (currentDate: Date, time: string): string => {
+        if (bookings) {
+            for (let i = 0; i < bookings.length; i++) {
+                const registeredDate = new Date(bookings[i].bookingDate.seconds * 1000);
+                if (currentDate.toString() === registeredDate.toString() && time === bookings[i].bookingTime) {
+                    return bookings[i].name;
+                }
+            }
+        }
+        return "";
+    };
 
   const formatDate = (date: Date): string => {
       const mo = new Intl.DateTimeFormat('en', { month: 'short' }).format(date);
