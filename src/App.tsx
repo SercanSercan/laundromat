@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import './App.css';
+import './App.scss';
 import { Card } from '@fremtind/jkl-card-react';
 import { DatePicker } from '@fremtind/jkl-datepicker-react';
 import "@fremtind/jkl-datepicker/datepicker.min.css";
@@ -59,17 +59,17 @@ function App() {
       );
   };
 
-    const findBookedPerson = (currentDate: Date, time: string): string => {
-        if (bookings) {
-            for (let i = 0; i < bookings.length; i++) {
-                const registeredDate = new Date(bookings[i].bookingDate.seconds * 1000);
-                if (currentDate.toString() === registeredDate.toString() && time === bookings[i].bookingTime) {
-                    return bookings[i].name;
-                }
+  const findBookedPerson = (currentDate: Date, time: string): string => {
+    if (bookings) {
+        for (let i = 0; i < bookings.length; i++) {
+            const registeredDate = new Date(bookings[i].bookingDate.seconds * 1000);
+            if (currentDate.toString() === registeredDate.toString() && time === bookings[i].bookingTime) {
+                return bookings[i].name;
             }
         }
-        return "";
-    };
+    }
+    return "";
+  };
 
   const formatDate = (date: Date): string => {
       const mo = new Intl.DateTimeFormat('en', { month: 'short' }).format(date);
