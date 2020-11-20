@@ -39,6 +39,7 @@ function App() {
   const renderBookingGrid = () => {
       const rows: JSX.Element[] = [];
       let currentDate = initialDate;
+      rows.push(renderHeader());
       for (let i = 0; i < numOfDays; i++) {
           rows.push(
               <div className={"bookingGrid-row"}>
@@ -56,6 +57,18 @@ function App() {
         <Card className="bookingGrid">
           {rows}
         </Card>
+      );
+  };
+
+  const renderHeader = () => {
+      return (
+          <div className={"bookingGrid-row"}>
+              <div className={"bookingGrid-row__dateCell"}></div>
+              <div className={"bookingGrid-row__bookingCell"}>{BOOKING_TIMES.SEVEN_ELEVEN}</div>
+              <div className={"bookingGrid-row__bookingCell"}>{BOOKING_TIMES.ELEVEN_FIFTEEN}</div>
+              <div className={"bookingGrid-row__bookingCell"}>{BOOKING_TIMES.FIFTEEN_NINETEEN}</div>
+              <div className={"bookingGrid-row__bookingCell"}>{BOOKING_TIMES.NINETEEN_TWENTYTHREE}</div>
+          </div>
       );
   };
 
