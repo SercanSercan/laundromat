@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import './App.scss';
-import { Card } from '@fremtind/jkl-card-react';
 import { DatePicker } from '@fremtind/jkl-datepicker-react';
 import "@fremtind/jkl-datepicker/datepicker.min.css";
 import "@fremtind/jkl-icon-button/icon-button.min.css";
@@ -42,33 +41,33 @@ function App() {
       rows.push(renderHeader());
       for (let i = 0; i < numOfDays; i++) {
           rows.push(
-              <div className={"bookingGrid-row"}>
+              <>
                   <div className={"bookingGrid-row__dateCell"}>{formatDate(currentDate)}</div>
                   <div className={"bookingGrid-row__bookingCell"}>{findBookedPerson(currentDate, BOOKING_TIMES.SEVEN_ELEVEN)}</div>
                   <div className={"bookingGrid-row__bookingCell"}>{findBookedPerson(currentDate, BOOKING_TIMES.ELEVEN_FIFTEEN)}</div>
                   <div className={"bookingGrid-row__bookingCell"}>{findBookedPerson(currentDate, BOOKING_TIMES.FIFTEEN_NINETEEN)}</div>
                   <div className={"bookingGrid-row__bookingCell"}>{findBookedPerson(currentDate, BOOKING_TIMES.NINETEEN_TWENTYTHREE)}</div>
-              </div>
+              </>
           );
           currentDate.setDate(currentDate.getDate() + 1);
       }
 
       return (
-        <Card className="bookingGrid">
+        <div className="bookingGrid">
           {rows}
-        </Card>
+        </div>
       );
   };
 
   const renderHeader = () => {
       return (
-          <div className={"bookingGrid-row"}>
+          <>
               <div className={"bookingGrid-row__dateCell"}></div>
               <div className={"bookingGrid-row__bookingCell"}>{BOOKING_TIMES.SEVEN_ELEVEN}</div>
               <div className={"bookingGrid-row__bookingCell"}>{BOOKING_TIMES.ELEVEN_FIFTEEN}</div>
               <div className={"bookingGrid-row__bookingCell"}>{BOOKING_TIMES.FIFTEEN_NINETEEN}</div>
               <div className={"bookingGrid-row__bookingCell"}>{BOOKING_TIMES.NINETEEN_TWENTYTHREE}</div>
-          </div>
+          </>
       );
   };
 
