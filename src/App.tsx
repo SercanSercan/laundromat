@@ -4,7 +4,7 @@ import { DatePicker } from '@fremtind/jkl-datepicker-react';
 import "@fremtind/jkl-datepicker/datepicker.min.css";
 import "@fremtind/jkl-icon-button/icon-button.min.css";
 import fire from './config/fire';
-import {BOOKING_TIMES, IBooking} from "./interfaces";
+import { BOOKING_TIMES, IBooking } from "./interfaces";
 
 const collectionName = "gabelsGate1";
 const numOfDays = 10;
@@ -62,7 +62,7 @@ function App() {
   const renderHeader = () => {
       return (
           <>
-              <div className={"bookingGrid-row__dateCell"}></div>
+              <div className={"bookingGrid-row__dateCell"}>&nbsp;</div>
               <div className={"bookingGrid-row__bookingCell"}>{BOOKING_TIMES.SEVEN_ELEVEN}</div>
               <div className={"bookingGrid-row__bookingCell"}>{BOOKING_TIMES.ELEVEN_FIFTEEN}</div>
               <div className={"bookingGrid-row__bookingCell"}>{BOOKING_TIMES.FIFTEEN_NINETEEN}</div>
@@ -84,9 +84,9 @@ function App() {
   };
 
   const formatDate = (date: Date): string => {
-      const mo = new Intl.DateTimeFormat('en', { month: 'short' }).format(date);
-      const da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(date);
-      return mo + " " + da;
+      const mo = new Intl.DateTimeFormat('no', { month: 'short' }).format(date);
+      const da = new Intl.DateTimeFormat('no', { day: '2-digit' }).format(date);
+      return da + " " + mo;
   };
 
   return (
