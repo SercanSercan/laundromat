@@ -3,6 +3,8 @@ import './App.scss';
 import { DatePicker } from '@fremtind/jkl-datepicker-react';
 import "@fremtind/jkl-datepicker/datepicker.min.css";
 import "@fremtind/jkl-icon-button/icon-button.min.css";
+import { TextInput } from '@fremtind/jkl-text-input-react';
+import "@fremtind/jkl-text-input/text-input.min.css";
 import fire from './config/fire';
 import { BOOKING_TIMES, IBooking } from "./interfaces";
 
@@ -71,16 +73,26 @@ function App() {
       );
   };
 
-  const findBookedPerson = (currentDate: Date, time: string): string => {
+  const findBookedPerson = (currentDate: Date, time: string): JSX.Element => {
+    let selectedValue = "";
     if (bookings) {
         for (let i = 0; i < bookings.length; i++) {
             const registeredDate = new Date(bookings[i].bookingDate.seconds * 1000);
             if (currentDate.toString() === registeredDate.toString() && time === bookings[i].bookingTime) {
-                return bookings[i].name;
+                selectedValue = bookings[i].name;
             }
         }
     }
-    return "";
+    return (
+        <TextInput
+            label={""}
+            onBlur={(e) => {
+                console.log(e.target.value);
+            }}
+            value={selectedValue}
+            maxLength={20}
+        />
+    );
   };
 
   const formatDate = (date: Date): string => {
